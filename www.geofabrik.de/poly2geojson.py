@@ -11,7 +11,6 @@ def main():
     for file in os.listdir(directory):
         if file.endswith(".poly"):
             name = os.path.basename(file).split(".")[0]
-            print(name)
             with open(os.path.join(directory, file)) as poly_file:
                 polygon = list()
                 polygons = list()
@@ -30,7 +29,7 @@ def main():
                 "type": "Feature",
                 "geometry": {
                    "type": "MultiPolygon" if len(polygons) > 1 else "Polygon",
-                   "coordinates": [polygons]
+                   "coordinates": [polygons] if len(polygons) > 1 else polygons
                 }
             }
             features["features"].append(feature)
